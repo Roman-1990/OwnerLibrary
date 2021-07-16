@@ -2,38 +2,26 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-import java.net.URL;
-
 import static org.aeonbits.owner.Config.LoadType.MERGE;
 
 @Config.LoadPolicy(MERGE)
 @Config.Sources({
         "system:properties",
-        "classpath:${driver}_driver.properties",
-        "classpath:remote_webdriver.properties"})
+        "classpath:config/${remote}.properties"
+})
 
 public interface WebConfig extends Config {
 
-    @DefaultValue("false")
     @Key("webdriver.remote")
     boolean isRemote();
 
-    @DefaultValue("https://user1:1234@selenoid.autotests.cloud/wd/hub/")
     @Key("webdriver.url")
-    URL getURL();
+    String getURL();
 
-    @DefaultValue("CHROME")
     @Key("webdriver.browser")
-    BROWSER getBrowser();
+    String getBrowser();
 
-    @DefaultValue("90.0")
     @Key("webdriver.browser.version")
     String getBrowserVersion();
-
-    enum BROWSER {
-        CHROME,
-        FIREFOX
-
-    }
 
 }

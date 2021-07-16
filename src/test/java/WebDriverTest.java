@@ -10,13 +10,16 @@ public class WebDriverTest{
     @Test
     void testWebDriver() {
         WebConfig config = ConfigFactory.create(WebConfig.class, System.getProperties());
+        Configuration.startMaximized = true;
         Configuration.browser = config.getBrowser();
         Configuration.browserVersion = config.getBrowserVersion();
-        if (config.isRemote()) {
-            Configuration.remote = config.getURL();
 
+        if(config.isRemote()) {
+            String login = config.selenideLogin();
+            String password = config.selenidePassword();
+            String url = config.getURL();
+            Configuration.remote = String.format("https://%s:%s@%s/wd/hub/", login, password, url);
         }
-
         open("https://yandex.ru");
     }
 }

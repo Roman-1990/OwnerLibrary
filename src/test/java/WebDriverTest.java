@@ -4,6 +4,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class WebDriverTest{
@@ -21,5 +22,6 @@ public class WebDriverTest{
             Configuration.remote = String.format("https://%s:%s@%s/wd/hub/", login, password, url);
         }
         open("https://yandex.ru");
+        sleep(5000);
     }
 }
